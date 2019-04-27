@@ -133,7 +133,7 @@ class DraggableCard extends Component {
 
   render() {
     const { props, setCardClassName, state } = this;
-    const { x, y, animation, pristine, dragging } = state;
+    const { x, y, animation, dragging } = state;
     const style = translate3d(x, y);
 
     return (

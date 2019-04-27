@@ -28,7 +28,7 @@ class Card extends Component {
 
   renderChildren() {
     const { props } = this;
-    const { active, childCount, children, index } = props;
+    const { active, childCount, children } = props;
 
     return React.Children.map(children, c => {
       const passedProps = {
