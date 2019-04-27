@@ -101,7 +101,7 @@ class Game extends React.Component {
               onSwipeRight={() => this.feedback(inSeason === true)}
             >
 
-              <ProductImage src={`${process.env.PUBLIC_URL}/img/products/${id}.png`}/>
+              <ProductImage src={`${process.env.PUBLIC_URL}/img/products/${id}.png`} alt={name}/>
               <ProductTitle>{name}</ProductTitle>
             </ProductCard>
           ))}
