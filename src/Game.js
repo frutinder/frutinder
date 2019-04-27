@@ -4,7 +4,23 @@ import styled from "styled-components";
 import Cards from "./components/Cards";
 import Card from "./components/CardSwitcher";
 
-const data = ["Alexandre", "Thomas", "Lucien"];
+import products from './products.json'
+
+const currentMonth = 4
+
+const data = Object.keys(products).map(product => {
+  return {
+    name: product,
+    inSeason: products[product][currentMonth - 1]
+  }
+})
+
+const shuffledData = data.map(product => {
+  const i = Math.floor(Math.random() * (data.length));
+  return data[i]
+})
+
+console.log({shuffledData})
 
 const Container = styled.div`
   background: orange;
@@ -25,21 +41,20 @@ const ProductCard = styled(Card)`
   height: 70%;
   width: 70%;
   margin: 0 auto;
-  transition: box-shadow 0.3s;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  cursor: pointer;
 `;
 
 const Game = () => {
   return (
     <Container>
       <Deck onEnd={() => console.log("end")}>
-        {data.map(item => (
+        {shuffledData.map(({name, inSeason}) => (
           <ProductCard
+            key={name}
             onSwipeLeft={() => console.log("swipe left")}
             onSwipeRight={() => console.log("swipe right")}
           >
-            <h2>{item}</h2>
+            <h2>{name}</h2>
+            <h2>{inSeason ? "yes" : "no"}</h2>
           </ProductCard>
         ))}
       </Deck>
