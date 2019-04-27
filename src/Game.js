@@ -16,10 +16,7 @@ const data = products.map(product => {
   }
 })
 
-const shuffledData = data.map(product => {
-  const i = Math.floor(Math.random() * (data.length));
-  return data[i]
-})
+const shuffledData = data.sort(() => Math.random() - 0.5);
 
 const backgroundColor = ({lastResponse}) => {
   switch (lastResponse) {
@@ -57,7 +54,7 @@ const ProductCard = styled(Card)`
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.01);
   border: solid 1px #f0f2f7;
 `;
-  
+
 const ProductImage = styled.img`
   margin: 0 auto;
   margin-bottom: 20px;
@@ -103,6 +100,7 @@ class Game extends React.Component {
               onSwipeLeft={() => this.feedback(inSeason === false)}
               onSwipeRight={() => this.feedback(inSeason === true)}
             >
+
               <ProductImage src={`${process.env.PUBLIC_URL}/img/products/${id}.png`}/>
               <ProductTitle>{name}</ProductTitle>
             </ProductCard>
