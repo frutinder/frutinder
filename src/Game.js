@@ -87,6 +87,7 @@ const Message = styled.h2`
 
 const FeedbackMessage = styled(Message)`
   font-size: 2.3em;
+  color: white;
 `
 
 
