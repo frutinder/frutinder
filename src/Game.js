@@ -21,8 +21,21 @@ const shuffledData = data.map(product => {
   return data[i]
 })
 
+const backgroundColor = ({lastResponse}) => {
+  switch (lastResponse) {
+    case 'none':
+      return 'orange';
+    case 'correct':
+      return 'green';
+    case 'incorrect':
+      return 'red';
+    default:
+      return 'orange';
+  }
+}
+
 const Container = styled.div`
-  background: orange;
+  background: ${backgroundColor};
 `
 
 const Deck = styled(Cards)`
@@ -45,25 +58,42 @@ const ProductCard = styled(Card)`
 const ProductImage = styled.img`
   width: 70%;
 `
+class Game extends React.Component {
 
-const Game = () => {
-  return (
-    <Container>
-      <Deck onEnd={() => console.log("end")}>
-        {shuffledData.map(({id, name, inSeason}) => (
-          <ProductCard
-            key={name}
-            onSwipeLeft={() => console.log("swipe left")}
-            onSwipeRight={() => console.log("swipe right")}
-          >
-            <h2>{name}</h2>
-            <h2>{inSeason ? "yes" : "no"}</h2>
-            <ProductImage src={`/img/products/${id}.png`}/>
-          </ProductCard>
-        ))}
-      </Deck>
-    </Container>
-  );
-};
+  constructor(props) {
+    super(props)
+    this.state = {
+      lastResponse: "none"
+    }
+  }
+
+  feedback = (isCorrect) => {
+    console.log(isCorrect);
+    this.setState({lastResponse: isCorrect ? "correct" : "incorrect"})
+    setTimeout(() => {
+      this.setState({lastResponse: 'none'})
+    }, 500)
+  }
+
+  render() {
+    return (
+      <Container lastResponse={this.state.lastResponse}>
+        <Deck onEnd={() => console.log("end")}>
+          {shuffledData.map(({id, name, inSeason}) => (
+            <ProductCard
+              key={name}
+              onSwipeLeft={() => this.feedback(inSeason === false)}
+              onSwipeRight={() => this.feedback(inSeason === true)}
+            >
+              <h2>{name}</h2>
+              <h2>{inSeason ? "yes" : "no"}</h2>
+              <ProductImage src={`/img/products/${id}.png`}/>
+            </ProductCard>
+          ))}
+        </Deck>
+      </Container>
+    );
+  }
+}
 
 export default Game;
