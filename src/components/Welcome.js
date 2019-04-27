@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   align-items: center;
   grid-template-rows: 1fr 60px;
   margin-left:  56px;
-	margin-right: 56px;
+  margin-right: 56px;
 `
 
 const Content = styled.div`
