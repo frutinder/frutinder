@@ -8,10 +8,11 @@ import products from './products.json'
 
 const currentMonth = 4
 
-const data = Object.keys(products).map(product => {
+const data = products.map(product => {
   return {
-    name: product,
-    inSeason: products[product][currentMonth - 1]
+    id: product.id,
+    name: product.displayName,
+    inSeason: product.months[currentMonth - 1]
   }
 })
 
@@ -19,8 +20,6 @@ const shuffledData = data.map(product => {
   const i = Math.floor(Math.random() * (data.length));
   return data[i]
 })
-
-console.log({shuffledData})
 
 const Container = styled.div`
   background: orange;
@@ -43,11 +42,15 @@ const ProductCard = styled(Card)`
   margin: 0 auto;
 `;
 
+const ProductImage = styled.img`
+  width: 70%;
+`
+
 const Game = () => {
   return (
     <Container>
       <Deck onEnd={() => console.log("end")}>
-        {shuffledData.map(({name, inSeason}) => (
+        {shuffledData.map(({id, name, inSeason}) => (
           <ProductCard
             key={name}
             onSwipeLeft={() => console.log("swipe left")}
@@ -55,6 +58,7 @@ const Game = () => {
           >
             <h2>{name}</h2>
             <h2>{inSeason ? "yes" : "no"}</h2>
+            <ProductImage src={`/img/products/${id}.png`}/>
           </ProductCard>
         ))}
       </Deck>
