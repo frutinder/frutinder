@@ -33,12 +33,14 @@ const backgroundColor = ({lastResponse}) => {
 
 const Container = styled.div`
   background: ${backgroundColor};
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 `
 
 const Deck = styled(Cards)`
-  position: relative;
   width: 100%;
-  height: 100vh;
+  flex: 6;
   overflow: hidden;
 `;
 
@@ -73,18 +75,75 @@ const ProductTitle = styled.span`
   letter-spacing: normal;
   color: #383838;
 `
-class Game extends React.Component {
 
+const Score = styled.h2`
+  color: white;
+  margin: 0;
+`
+
+const Message = styled.h2`
+  margin: 0;
+`
+
+const FeedbackMessage = styled(Message)`
+  font-size: 2.3em;
+`
+
+
+const HeaderLayout = ({lastResponse, score, className}) => {
+  switch ( lastResponse ) {
+    case "correct":
+      return (
+        <div className={className}>
+          <FeedbackMessage>¡Correcto!</FeedbackMessage>
+        </div>
+      )
+    case "incorrect":
+      return (
+        <div className={className}>
+          <FeedbackMessage>¡Ohhh, No!</FeedbackMessage>
+        </div>
+      )
+    default:
+      return (
+        <div className={className}>
+          <Score>{score}</Score>
+          <Message>¿Estoy de temporada?</Message>
+        </div>
+      )
+  }
+}
+
+const Header = styled(HeaderLayout)`
+  display: flex;
+  flex: 2;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  text-transform: uppercase;
+`
+
+class Game extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      lastResponse: "none"
+      lastResponse: "none",
+      score: 0
     }
+  }
+
+  onCorrect = () => {
+    this.setState({lastResponse: "correct", score: this.state.score + 1234})
+  }
+
+  onIncorrect = () => {
+    this.setState({lastResponse: "incorrect", score: this.state.score - 123})
   }
 
   feedback = (isCorrect) => {
     console.log(isCorrect);
-    this.setState({lastResponse: isCorrect ? "correct" : "incorrect"})
+    isCorrect ? this.onCorrect() : this.onIncorrect()
+
     setTimeout(() => {
       this.setState({lastResponse: 'none'})
     }, 500)
@@ -93,6 +152,7 @@ class Game extends React.Component {
   render() {
     return (
       <Container lastResponse={this.state.lastResponse}>
+        <Header score={this.state.score} lastResponse={this.state.lastResponse} />
         <Deck onEnd={() => console.log("end")}>
           {shuffledData.map(({id, name, inSeason}) => (
             <ProductCard
