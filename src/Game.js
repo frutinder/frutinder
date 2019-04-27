@@ -21,11 +21,11 @@ const shuffledData = data.sort(() => Math.random() - 0.5);
 const backgroundColor = ({lastResponse}) => {
   switch (lastResponse) {
     case 'none':
-      return 'orange';
+      return '#fcc023';
     case 'correct':
-      return 'green';
+      return '#22ce8b';
     case 'incorrect':
-      return 'red';
+      return '#f46363';
     default:
       return 'orange';
   }
@@ -124,12 +124,84 @@ const Header = styled(HeaderLayout)`
   text-transform: uppercase;
 `
 
+const Timebar = styled.div`
+  height: 10px;
+  width: ${({percentage}) => `${percentage}vw`}
+  background: #4691f4;
+`
+
+const MainScene = ({lastResponse, secondsLeft, score, onResponse}) => (
+  <Container lastResponse={lastResponse}>
+    <Timebar percentage={secondsLeft / 60 * 100}/>
+    <Header score={score} lastResponse={lastResponse} />
+    <Deck onEnd={() => console.log("end")}>
+      {shuffledData.map(({id, name, inSeason}) => (
+        <ProductCard
+          key={name}
+          onSwipeLeft={() => onResponse(inSeason === false)}
+          onSwipeRight={() => onResponse(inSeason === true)}
+        >
+
+          <ProductImage src={`${process.env.PUBLIC_URL}/img/products/${id}.png`} alt={name}/>
+          <ProductTitle>{name}</ProductTitle>
+        </ProductCard>
+      ))}
+    </Deck>
+  </Container>
+)
+
+const ClockImage = styled.img`
+  height: 50%;
+`
+
+class TimeupSceneLayout extends React.Component {
+  componentDidMount() {
+    setTimeout(this.props.nextScene, 3000)
+  }
+
+  render() {
+    return (
+      <div className={this.props.className}>
+        <FeedbackMessage>¡Tiempo!</FeedbackMessage>
+        <ClockImage src={`${process.env.PUBLIC_URL}/img/general/clock.png`}/>
+      </div>
+    )
+  }
+}
+
+const TimeupScene = styled(TimeupSceneLayout)`
+  height: 100vh;
+  background: #4691f4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+`
+
 class Game extends React.Component {
+  playTime = 60
+
   constructor(props) {
     super(props)
     this.state = {
       lastResponse: "none",
-      score: 0
+      score: 0,
+      secondsLeft: this.playTime,
+      scene: "game"
+    }
+  }
+
+  componentDidMount() {
+    setTimeout(this.tick, 100)
+  }
+
+  tick = () => {
+    if (this.state.secondsLeft <= 0) {
+      this.setState({secondsLeft: this.state.secondsLeft - 0.1})
+      this.setState({scene: "timeup"})
+    } else {
+      this.setState({secondsLeft: this.state.secondsLeft - 0.1})
+      setTimeout(this.tick, 100)
     }
   }
 
@@ -151,24 +223,21 @@ class Game extends React.Component {
   }
 
   render() {
-    return (
-      <Container lastResponse={this.state.lastResponse}>
-        <Header score={this.state.score} lastResponse={this.state.lastResponse} />
-        <Deck onEnd={() => console.log("end")}>
-          {shuffledData.map(({id, name, inSeason}) => (
-            <ProductCard
-              key={name}
-              onSwipeLeft={() => this.feedback(inSeason === false)}
-              onSwipeRight={() => this.feedback(inSeason === true)}
-            >
-
-              <ProductImage src={`${process.env.PUBLIC_URL}/img/products/${id}.png`} alt={name}/>
-              <ProductTitle>{name}</ProductTitle>
-            </ProductCard>
-          ))}
-        </Deck>
-      </Container>
-    );
+    switch (this.state.scene) {
+      case "game":
+        return (
+          <MainScene
+            lastResponse={this.state.lastResponse}
+            score={this.state.score}
+            secondsLeft={this.state.secondsLeft}
+            onResponse={this.feedback}
+          />
+        );
+      case "timeup":
+        return (
+          <TimeupScene nextScene={() => this.setState({scene: "game"})} />
+        )
+    }
   }
 }
 
