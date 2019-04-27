@@ -47,16 +47,34 @@ const Deck = styled(Cards)`
 
 const ProductCard = styled(Card)`
   text-align: center;
+  margin: 0 auto;
   background-size: cover;
   position: absolute;
   background: white;
-  height: 70%;
-  width: 70%;
+  height: 331px;
+  width: 282px;
+  border-radius: 19px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.01);
+  border: solid 1px #f0f2f7;
+`;
+  
+const ProductImage = styled.img`
   margin: 0 auto;
+  margin-bottom: 20px;
+  height: 75%;
 `;
 
-const ProductImage = styled.img`
-  width: 70%;
+const ProductTitle = styled.span`
+  width: 87px;
+  height: 37px;
+  font-family: Roboto;
+  font-size: 28px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #383838;
 `
 class Game extends React.Component {
 
@@ -85,9 +103,8 @@ class Game extends React.Component {
               onSwipeLeft={() => this.feedback(inSeason === false)}
               onSwipeRight={() => this.feedback(inSeason === true)}
             >
-              <h2>{name}</h2>
-              <h2>{inSeason ? "yes" : "no"}</h2>
-              <ProductImage src={`/img/products/${id}.png`}/>
+              <ProductImage src={`${process.env.PUBLIC_URL}/img/products/${id}.png`}/>
+              <ProductTitle>{name}</ProductTitle>
             </ProductCard>
           ))}
         </Deck>
