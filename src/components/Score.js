@@ -85,8 +85,13 @@ const ShareTwitter = styled.span`
   background-color: #00acee;
 `
 
+const ShareLink = styled.a`
+  text-decoration: none;
+`
+
 const TwitterImage = styled.i`
   font-family: "Font Awesome 5 Brands";
+  color: #ffffff;
 `
 
 class Score extends React.Component {
@@ -105,7 +110,12 @@ class Score extends React.Component {
             <ShareContainer>
               <ShareText>Comparte tu puntuación y reta a tus amigos.</ShareText>
               <ShareList>
-                <ShareTwitter><TwitterImage className="fa-twitter"></TwitterImage></ShareTwitter>
+                <ShareTwitter>
+                  <ShareLink
+                    href={"https://twitter.com/intent/tweet?text=He conseguido 204498 puntos en Frutinder! Entra en frutinder.es y adivina qué frutas y verduras están de temporada 🍉🥒"}>
+                    <TwitterImage className="fa-twitter"></TwitterImage>
+                  </ShareLink>
+                </ShareTwitter>
               </ShareList>
             </ShareContainer>
           </div>
