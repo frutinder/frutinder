@@ -1,4 +1,6 @@
-# Frutinder ![](https://raw.githubusercontent.com/frutinder/frutinder/master/public/favicon.png)
+![](public/img/general/avatar.png)
+
+# Frutinder
 
 Frutinder is a mobile web application that lets you learn about fruits and veggies that are in season in Spain in the current month. 
 
