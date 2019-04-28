@@ -180,7 +180,7 @@ const TimeupScene = styled(TimeupSceneLayout)`
 `;
 
 class Game extends React.Component {
-  playTime = 60;
+  playTime = 30;
 
   constructor(props) {
     super(props);
