@@ -6,13 +6,13 @@ import Card from "./components/CardSwitcher";
 
 import products from './products.json'
 
-const currentMonth = 4
+const currentMonth = new Date().getMonth()
 
 const data = products.map(product => {
   return {
     id: product.id,
     name: product.displayName,
-    inSeason: product.months[currentMonth - 1]
+    inSeason: product.months[currentMonth]
   }
 })
 
