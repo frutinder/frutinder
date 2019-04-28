@@ -1,6 +1,7 @@
 import React from "react";
 
 import styled from "styled-components";
+import PrimaryButton from "./PrimaryButton";
 
 const Container = styled.div`
   display: grid;
@@ -96,7 +97,7 @@ const TwitterImage = styled.i`
 
 class Score extends React.Component {
   render() {
-    const { finalScore } = this.props;
+    const { finalScore, resetGame } = this.props;
     return (
       <Container>
         <Content>
@@ -117,6 +118,7 @@ class Score extends React.Component {
                   </ShareLink>
                 </ShareTwitter>
               </ShareList>
+              <PrimaryButton onClick={resetGame}>Volver a jugar</PrimaryButton>
             </ShareContainer>
           </div>
         </Content>

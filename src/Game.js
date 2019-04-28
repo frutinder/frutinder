@@ -201,14 +201,10 @@ class Game extends React.Component {
     };
   }
 
-  componentDidMount() {
-    setTimeout(this.tick, 100);
-  }
-
   tick = () => {
     if (this.state.secondsLeft <= 0) {
-      this.setState({ secondsLeft: this.state.secondsLeft - 0.1 });
       this.setState({ scene: "timeup" });
+      this.setState({ secondsLeft: this.state.secondsLeft - 0.1 });
     } else {
       this.setState({ secondsLeft: this.state.secondsLeft - 0.1 });
       setTimeout(this.tick, 100);
@@ -216,7 +212,12 @@ class Game extends React.Component {
   };
 
   startGame = () => {
-    this.setState({ scene: "game" });
+    this.setState({ scene: "game", secondsLeft: PLAY_TIME });
+    setTimeout(this.tick, 100);
+  };
+
+  resetGame = () => {
+    this.setState({ score: 0 }, this.startGame);
   };
 
   onCorrect = () => {
@@ -256,7 +257,12 @@ class Game extends React.Component {
           />
         );
       case "game-finished":
-        return <ScoreScene finalScore={this.state.score} />;
+        return (
+          <ScoreScene
+            finalScore={this.state.score}
+            resetGame={this.resetGame}
+          />
+        );
     }
   }
 }
