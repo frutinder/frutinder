@@ -62,6 +62,12 @@ const ProductImage = styled.img`
   margin: 0 auto;
   margin-bottom: 20px;
   height: 75%;
+  user-drag: none; 
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 `;
 
 const ProductTitle = styled.span`
@@ -144,6 +150,8 @@ const MainScene = ({ lastResponse, secondsLeft, score, onResponse }) => (
           <ProductImage
             src={`${process.env.PUBLIC_URL}/img/products/${id}.png`}
             alt={name}
+            draggable={false}
+            onDragStart={(e) => e.preventDefault() }
           />
           <ProductTitle>{name}</ProductTitle>
         </ProductCard>
