@@ -207,18 +207,19 @@ class Game extends React.Component {
   }
 
   tick = () => {
-    if (this.state.secondsLeft <= 0) {
+    const tickDuration = 1
+    if (this.state.secondsLeft <= tickDuration) {
       this.setState({ scene: "timeup" });
-      this.setState({ secondsLeft: this.state.secondsLeft - 0.1 });
+      this.setState({ secondsLeft: this.state.secondsLeft - tickDuration });
     } else {
-      this.setState({ secondsLeft: this.state.secondsLeft - 0.1 });
-      setTimeout(this.tick, 100);
+      this.setState({ secondsLeft: this.state.secondsLeft - tickDuration });
+      setTimeout(this.tick, 1000);
     }
   };
 
   startGame = () => {
     this.setState({ scene: "game", secondsLeft: PLAY_TIME });
-    setTimeout(this.tick, 100);
+    setTimeout(this.tick, 1000);
   };
 
   resetGame = () => {
