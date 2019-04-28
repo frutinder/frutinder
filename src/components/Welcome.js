@@ -63,6 +63,8 @@ const FooterText = styled.p`
 
 class Welcome extends React.Component {
   render() {
+    const { onStart } = this.props;
+
     return (
       <Container>
         <Wrapper>
@@ -72,7 +74,7 @@ class Welcome extends React.Component {
               <h2>¿Es o no es<br/>de temporada?</h2>
               <p>El juego que te ayuda a saber qué alimentos son de temporada.<br/>
               ¡Haz match con la sostenibilidad!</p>
-              <StartGameButton>Empezar</StartGameButton>
+              <StartGameButton onClick={onStart}>Empezar</StartGameButton>
             </Body>
           </Content>
           <Footer>

@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import Cards from "./components/Cards";
 import Card from "./components/CardSwitcher";
+import Welcome from "./components/Welcome";
 
 import products from "./products.json";
 
@@ -187,8 +188,7 @@ class Game extends React.Component {
     this.state = {
       lastResponse: "none",
       score: 0,
-      secondsLeft: this.playTime,
-      scene: "game"
+      secondsLeft: this.playTime
     };
   }
 
@@ -205,6 +205,10 @@ class Game extends React.Component {
       setTimeout(this.tick, 100);
     }
   };
+
+  startGame = () => {
+    this.setState({scene: "game"})
+  }
 
   onCorrect = () => {
     this.setState({ lastResponse: "correct", score: this.state.score + 1234 });
@@ -225,6 +229,10 @@ class Game extends React.Component {
 
   render() {
     switch (this.state.scene) {
+      default:
+        return (
+          <Welcome onStart={this.startGame}/>
+        );
       case "game":
         return (
           <MainScene
