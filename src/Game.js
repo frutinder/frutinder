@@ -64,7 +64,7 @@ const ProductImage = styled.img`
   margin: 0 auto;
   margin-bottom: 20px;
   height: 75%;
-  user-drag: none; 
+  user-drag: none;
   user-select: none;
   -moz-user-select: none;
   -webkit-user-drag: none;
@@ -153,7 +153,7 @@ const MainScene = ({ lastResponse, secondsLeft, score, onResponse }) => (
             src={`${process.env.PUBLIC_URL}/img/products/${id}.png`}
             alt={name}
             draggable={false}
-            onDragStart={(e) => e.preventDefault() }
+            onDragStart={e => e.preventDefault()}
           />
           <ProductTitle>{name}</ProductTitle>
         </ProductCard>
@@ -164,6 +164,7 @@ const MainScene = ({ lastResponse, secondsLeft, score, onResponse }) => (
 
 const ClockImage = styled.img`
   height: 50%;
+  animation: clock-ring 0.5s linear infinite both;
 `;
 
 class TimeupSceneLayout extends React.Component {
