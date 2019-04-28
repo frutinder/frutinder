@@ -116,7 +116,12 @@ const HeaderLayout = ({ lastResponse, score, className }) => {
     default:
       return (
         <div className={className}>
-          <Score>{score}</Score>
+          <Score>
+            {score}
+            <span role="img" aria-label="cherry emoji">
+              🍒
+            </span>
+          </Score>
           <Message>¿Estoy de temporada?</Message>
         </div>
       );

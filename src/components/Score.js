@@ -95,6 +95,14 @@ const TwitterImage = styled.i`
   color: #ffffff;
 `;
 
+const AcknowledgeText = styled.p`
+  margin-top: 14px;
+  font-size: 12px;
+  a {
+    font-weight: 900;
+  }
+`;
+
 class Score extends React.Component {
   render() {
     const { finalScore, resetGame } = this.props;
@@ -106,7 +114,12 @@ class Score extends React.Component {
           </Logo>
           <div>
             <ScoreTitle>Tu puntuación</ScoreTitle>
-            <ScoreText>{finalScore}</ScoreText>
+            <ScoreText>
+              {finalScore}
+              <span role="img" aria-label="cherry emoji">
+                🍒
+              </span>
+            </ScoreText>
             <ShareContainer>
               <ShareText>Comparte tu puntuación y reta a tus amigos.</ShareText>
               <ShareList>
@@ -120,6 +133,12 @@ class Score extends React.Component {
               </ShareList>
               <PrimaryButton onClick={resetGame}>Volver a jugar</PrimaryButton>
             </ShareContainer>
+            <AcknowledgeText>
+              Este juego ha sido posible
+              <br />
+              gracias al proyecto <br />
+              <a href="https://soydetemporada.es">soydetemporada.es</a>
+            </AcknowledgeText>
           </div>
         </Content>
       </Container>
