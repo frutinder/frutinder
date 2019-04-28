@@ -4,10 +4,12 @@ import styled from "styled-components";
 import Cards from "./components/Cards";
 import Card from "./components/CardSwitcher";
 import Welcome from "./components/Welcome";
+import ScoreScene from "./components/Score";
 
 import products from "./products.json";
 
 const currentMonth = new Date().getMonth();
+const PLAY_TIME = 30;
 
 const data = products.map(product => {
   return {
@@ -138,7 +140,7 @@ const Timebar = styled.div`
 
 const MainScene = ({ lastResponse, secondsLeft, score, onResponse }) => (
   <Container lastResponse={lastResponse}>
-    <Timebar percentage={(secondsLeft / 60) * 100} />
+    <Timebar percentage={(secondsLeft / PLAY_TIME) * 100} />
     <Header score={score} lastResponse={lastResponse} />
     <Deck onEnd={() => console.log("end")}>
       {shuffledData.map(({ id, name, inSeason }) => (
@@ -189,14 +191,12 @@ const TimeupScene = styled(TimeupSceneLayout)`
 `;
 
 class Game extends React.Component {
-  playTime = 30;
-
   constructor(props) {
     super(props);
     this.state = {
       lastResponse: "none",
       score: 0,
-      secondsLeft: this.playTime
+      secondsLeft: PLAY_TIME
     };
   }
 
@@ -215,8 +215,8 @@ class Game extends React.Component {
   };
 
   startGame = () => {
-    this.setState({scene: "game"})
-  }
+    this.setState({ scene: "game" });
+  };
 
   onCorrect = () => {
     this.setState({ lastResponse: "correct", score: this.state.score + 1234 });
@@ -238,9 +238,7 @@ class Game extends React.Component {
   render() {
     switch (this.state.scene) {
       default:
-        return (
-          <Welcome onStart={this.startGame}/>
-        );
+        return <Welcome onStart={this.startGame} />;
       case "game":
         return (
           <MainScene
@@ -252,8 +250,12 @@ class Game extends React.Component {
         );
       case "timeup":
         return (
-          <TimeupScene nextScene={() => this.setState({ scene: "game" })} />
+          <TimeupScene
+            nextScene={() => this.setState({ scene: "game-finished" })}
+          />
         );
+      case "game-finished":
+        return <ScoreScene finalScore={this.state.score} />;
     }
   }
 }
