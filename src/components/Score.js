@@ -112,7 +112,7 @@ class Score extends React.Component {
               <ShareList>
                 <ShareTwitter>
                   <ShareLink
-                    href={`https://twitter.com/intent/tweet?text=He conseguido ${finalScore} puntos en Frutinder! Entra en frutinder.es y adivina qué frutas y verduras están de temporada 🍉🥒 %23frutinder`}
+                    href={`https://twitter.com/intent/tweet?text=He conseguido ${finalScore} puntos en Frutinder! Entra en frutinder.com y adivina qué frutas y verduras están de temporada 🍉🥒 %23frutinder`}
                   >
                     <TwitterImage className="fa-twitter" />
                   </ShareLink>
