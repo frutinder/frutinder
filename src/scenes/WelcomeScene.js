@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import PrimaryButton from "./PrimaryButton";
+import PrimaryButton from "../components/PrimaryButton";
 
 const Container = styled.div`
   background: #fcc023 url("${`${process.env.PUBLIC_URL}/img/general/bg.png`}");
@@ -48,7 +48,7 @@ const FooterText = styled.p`
   }
 `;
 
-class Welcome extends React.Component {
+class WelcomeScene extends React.Component {
   render() {
     const { onStart } = this.props;
 
@@ -84,4 +84,4 @@ class Welcome extends React.Component {
   }
 }
 
-export default Welcome;
+export default WelcomeScene;

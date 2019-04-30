@@ -1,7 +1,7 @@
 import React from "react";
 
 import styled from "styled-components";
-import PrimaryButton from "./PrimaryButton";
+import PrimaryButton from "../components/PrimaryButton";
 
 const Container = styled.div`
   display: grid;
@@ -103,7 +103,7 @@ const AcknowledgeText = styled.p`
   }
 `;
 
-class Score extends React.Component {
+class ScoreScene extends React.Component {
   render() {
     const { finalScore, resetGame } = this.props;
     return (
@@ -146,4 +146,4 @@ class Score extends React.Component {
   }
 }
 
-export default Score;
+export default ScoreScene;
