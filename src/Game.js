@@ -15,7 +15,8 @@ const data = products.map(product => {
   return {
     id: product.id,
     name: product.displayName,
-    inSeason: product.months[currentMonth]
+    inSeason: product.months[currentMonth],
+    image: product.image
   };
 });
 
