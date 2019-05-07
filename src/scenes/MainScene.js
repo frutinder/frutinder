@@ -130,14 +130,14 @@ const MainScene = ({
     <Timebar percentage={(secondsLeft / totalPlayTime) * 100} />
     <Header score={score} lastResponse={lastResponse} />
     <Deck onEnd={() => console.log("end")}>
-      {shuffledData.map(({ id, name, inSeason }) => (
+      {shuffledData.map(({ id, name, inSeason, image }) => (
         <ProductCard
           key={name}
           onSwipeLeft={() => onResponse(inSeason === false)}
           onSwipeRight={() => onResponse(inSeason === true)}
         >
           <ProductImage
-            src={`${process.env.PUBLIC_URL}/img/products/${id}.png`}
+            src={`data:image/png;base64,${image}`}
             alt={name}
             draggable={false}
             onDragStart={e => e.preventDefault()}
