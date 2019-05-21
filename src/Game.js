@@ -8,7 +8,7 @@ import ScoreScene from "./scenes/ScoreScene";
 import products from "./products.json";
 import "./Game.css";
 
-const currentMonth = new Date().getMonth();
+const currentMonth = new Date().getMonth() - 1;
 const PLAY_TIME = 30;
 
 const data = products.map(product => {
