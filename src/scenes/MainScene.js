@@ -1,6 +1,6 @@
 import React from "react";
 
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Cards from "../components/Cards";
 import Card from "../components/CardSwitcher";
 import { FeedbackMessage, Message } from "../components/FeedbackMessage";
@@ -112,25 +112,34 @@ const Header = styled(HeaderLayout)`
   text-transform: uppercase;
 `;
 
+const timebarAnimation = keyframes`
+  from {
+    width 100vw;
+  }
+
+  to {
+    width 0vw;
+  }
+`;
+
 const Timebar = styled.div`
   height: 10px;
-  width: ${({ percentage }) => `${percentage}vw`}
+  animation: ${timebarAnimation} ${({ playTime }) => playTime}s linear;
   background: #4691f4;
 `;
 
 const MainScene = ({
   lastResponse,
   onResponse,
-  secondsLeft,
   score,
   shuffledData,
   totalPlayTime
 }) => (
   <Container lastResponse={lastResponse}>
-    <Timebar percentage={(secondsLeft / totalPlayTime) * 100} />
+    <Timebar playTime={totalPlayTime} />
     <Header score={score} lastResponse={lastResponse} />
     <Deck onEnd={() => console.log("end")}>
-      {shuffledData.map(({ id, name, inSeason, image }) => (
+      {shuffledData.map(({ name, inSeason, image }) => (
         <ProductCard
           key={name}
           onSwipeLeft={() => onResponse(inSeason === false)}

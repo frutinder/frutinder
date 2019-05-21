@@ -27,25 +27,17 @@ class Game extends React.Component {
     super(props);
     this.state = {
       lastResponse: "none",
-      score: 0,
-      secondsLeft: PLAY_TIME
+      score: 0
     };
   }
 
-  tick = () => {
-    const tickDuration = 1;
-    if (this.state.secondsLeft <= tickDuration) {
-      this.setState({ scene: "timeup" });
-      this.setState({ secondsLeft: this.state.secondsLeft - tickDuration });
-    } else {
-      this.setState({ secondsLeft: this.state.secondsLeft - tickDuration });
-      setTimeout(this.tick, 1000);
-    }
+  timeup = () => {
+    this.setState({ scene: "timeup" });
   };
 
   startGame = () => {
-    this.setState({ scene: "game", secondsLeft: PLAY_TIME });
-    setTimeout(this.tick, 1000);
+    this.setState({ scene: "game" });
+    setTimeout(this.timeup, PLAY_TIME * 1000);
   };
 
   resetGame = () => {
@@ -79,7 +71,6 @@ class Game extends React.Component {
             lastResponse={this.state.lastResponse}
             onResponse={this.feedback}
             score={this.state.score}
-            secondsLeft={this.state.secondsLeft}
             shuffledData={shuffledData}
             totalPlayTime={PLAY_TIME}
           />
