@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const PrimaryButton = styled.button`
   margin-top: 30px;
-  max-width: 155px;
+  max-width: 180px;
   border-radius: 9999px;
   border: solid 0px rgba(0, 0, 0, 0);
   font-size: 0.9375em;
