@@ -1,6 +1,7 @@
 import React from "react";
 
 import WelcomeScene from "./scenes/WelcomeScene";
+import InstructionsScene from "./scenes/InstructionsScene";
 import MainScene from "./scenes/MainScene";
 import TimeupScene from "./scenes/TimeupScene";
 import ScoreScene from "./scenes/ScoreScene";
@@ -40,6 +41,10 @@ class Game extends React.Component {
     setTimeout(this.timeup, PLAY_TIME * 1000);
   };
 
+  showInstructions = () => {
+    this.setState({ scene: "instructions" });
+  };
+
   resetGame = () => {
     this.setState({ score: 0 }, this.startGame);
   };
@@ -53,7 +58,6 @@ class Game extends React.Component {
   };
 
   feedback = isCorrect => {
-    console.log(isCorrect);
     isCorrect ? this.onCorrect() : this.onIncorrect();
 
     setTimeout(() => {
@@ -64,7 +68,7 @@ class Game extends React.Component {
   render() {
     switch (this.state.scene) {
       default:
-        return <WelcomeScene onStart={this.startGame} />;
+        return <WelcomeScene onStart={this.startGame} onInstructions={this.showInstructions} />;
       case "game":
         return (
           <MainScene
@@ -75,6 +79,8 @@ class Game extends React.Component {
             totalPlayTime={PLAY_TIME}
           />
         );
+      case "instructions":
+        return <InstructionsScene onStart={this.startGame} />;
       case "timeup":
         return (
           <TimeupScene

@@ -105,7 +105,7 @@ const HeaderLayout = ({ lastResponse, score, className }) => {
 
 const Header = styled(HeaderLayout)`
   display: flex;
-  flex: 2;
+  flex: 3;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;

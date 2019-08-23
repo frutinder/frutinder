@@ -1,37 +1,9 @@
 import React from "react";
-
 import styled from "styled-components";
+
+import MenuContainer from "../components/MenuContainer";
 import PrimaryButton from "../components/PrimaryButton";
 
-const Container = styled.div`
-  display: grid;
-  min-height: 100vh;
-  justify-content: center;
-  align-items: center;
-  grid-template-rows: 1fr 60px;
-  background: #fcc023 url("${`${process.env.PUBLIC_URL}/img/general/bg.png`}");
-  color: #040e28;
-  font-size: 16px;
-  line-height: 1.2;
-`;
-
-const Content = styled.div`
-  text-align: center;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  margin-left: 56px;
-  margin-right: 56px;
-`;
-
-const Logo = styled.div`
-  margin-bottom: 56px;
-`;
-
-const LogoImage = styled.img`
-  max-width: 250px;
-  height: auto;
-  width: 80%;
-`;
 
 const ScoreTitle = styled.h2`
   line-height: 1.15;
@@ -107,41 +79,36 @@ class ScoreScene extends React.Component {
   render() {
     const { finalScore, resetGame } = this.props;
     return (
-      <Container>
-        <Content>
-          <Logo>
-            <LogoImage src="img/general/logo.png" alt="Frutinder" />
-          </Logo>
-          <div>
-            <ScoreTitle>Tu puntuación</ScoreTitle>
-            <ScoreText>
-              {finalScore}
-              <span role="img" aria-label="cherry emoji">
-                🍒
-              </span>
-            </ScoreText>
-            <ShareContainer>
-              <ShareText>Comparte tu puntuación y reta a tus amigos.</ShareText>
-              <ShareList>
-                <ShareTwitter>
-                  <ShareLink
-                    href={`https://twitter.com/intent/tweet?text=He conseguido ${finalScore} puntos en Frutinder! Entra en frutinder.com y adivina qué frutas y verduras están de temporada 🍉🥒 %23frutinder`}
-                  >
-                    <TwitterImage className="fa-twitter" />
-                  </ShareLink>
-                </ShareTwitter>
-              </ShareList>
-              <PrimaryButton onClick={resetGame}>Volver a jugar</PrimaryButton>
-            </ShareContainer>
-            <AcknowledgeText>
-              Este juego ha sido posible
-              <br />
-              gracias al proyecto <br />
-              <a href="https://soydetemporada.es">soydetemporada.es</a>
-            </AcknowledgeText>
-          </div>
-        </Content>
-      </Container>
+      <MenuContainer>
+        <div>
+          <ScoreTitle>Tu puntuación</ScoreTitle>
+          <ScoreText>
+            {finalScore}
+            <span role="img" aria-label="cherry emoji">
+              🍒
+            </span>
+          </ScoreText>
+          <ShareContainer>
+            <ShareText>Comparte tu puntuación y reta a tus amigos.</ShareText>
+            <ShareList>
+              <ShareTwitter>
+                <ShareLink
+                  href={`https://twitter.com/intent/tweet?text=He conseguido ${finalScore} puntos en Frutinder! Entra en frutinder.com y adivina qué frutas y verduras están de temporada 🍉🥒 %23frutinder`}
+                >
+                  <TwitterImage className="fa-twitter" />
+                </ShareLink>
+              </ShareTwitter>
+            </ShareList>
+            <PrimaryButton onClick={resetGame}>Volver a jugar</PrimaryButton>
+          </ShareContainer>
+          <AcknowledgeText>
+            Este juego ha sido posible
+            <br />
+            gracias al proyecto <br />
+            <a href="https://soydetemporada.es">soydetemporada.es</a>
+          </AcknowledgeText>
+        </div>
+      </MenuContainer>
     );
   }
 }
