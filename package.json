@@ -6,7 +6,7 @@
   "dependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.0",
+    "react-scripts": "3.3.0",
     "react-swipe-card": "github:damien-mcmahon/react-swipe-card",
     "styled-components": "^4.2.0"
   },
